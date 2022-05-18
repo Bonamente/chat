@@ -33,6 +33,7 @@ rules:
   functional/functional-parameters: 0
   functional/no-try-statement: 0
   functional/no-throw-statement: 0
+  react/jsx-props-no-spreading: 'off'
   react/function-component-definition:
   - 2
   - namedComponents: arrow-function
