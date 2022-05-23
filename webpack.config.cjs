@@ -7,6 +7,7 @@ const mode = process.env.NODE_ENV || 'development';
 
 module.exports = {
   mode,
+  devtool: 'source-map',
   resolve: {
     extensions: ['.js', '.jsx'],
   },
