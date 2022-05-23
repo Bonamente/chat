@@ -1,12 +1,26 @@
-import React from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 
 import { Card, Form, Button } from 'react-bootstrap';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 
 import { useFormik } from 'formik';
 import * as yup from 'yup';
+import axios from 'axios';
+
+import useAuth from '../../hooks/useAuth.jsx';
+import routes from '../../routes.js';
 
 const LoginForm = () => {
+  const auth = useAuth();
+  const [authFailed, setAuthFailed] = useState(false);
+
+  const navigate = useNavigate();
+  const inputRef = useRef();
+
+  useEffect(() => {
+    inputRef.current.focus();
+  }, []);
+
   const initialValues = {
     username: '',
     password: '',
@@ -17,8 +31,21 @@ const LoginForm = () => {
     password: yup.string().required(),
   });
 
-  const onSubmit = (values) => {
-    console.log(values);
+  const onSubmit = async (values) => {
+    setAuthFailed(false);
+
+    try {
+      const { data } = await axios.post(routes.loginPath(), values);
+      auth.logIn(data);
+      navigate('/');
+    } catch (err) {
+      if (err.isAxiosError && err.response.status === 401) {
+        setAuthFailed(true);
+        inputRef.current.select();
+        return;
+      }
+      throw err;
+    }
   };
 
   const formik = useFormik({
@@ -34,20 +61,27 @@ const LoginForm = () => {
           <h1 className="text-center mb-4">Войти</h1>
           <Form.Group className="form-floating mb-3">
             <Form.Control
-              type="text"
               id="username"
               name="username"
+              type="text"
+              autoComplete="username"
               placeholder="Ваш ник"
+              required
+              ref={inputRef}
+              isInvalid={authFailed}
               {...formik.getFieldProps('username')}
             />
             <Form.Label>Ваш ник</Form.Label>
           </Form.Group>
           <Form.Group className="form-floating mb-4">
             <Form.Control
-              type="password"
               id="password"
               name="password"
+              type="password"
+              autoComplete="current-password"
               placeholder="Пароль"
+              required
+              isInvalid={authFailed}
               {...formik.getFieldProps('password')}
             />
             <Form.Label>Пароль</Form.Label>
