@@ -4,11 +4,17 @@ import { useDispatch, useSelector } from 'react-redux';
 import ChannelList from '../components/channels/ChannelList.jsx';
 import MessageList from '../components/messages/MessageList.jsx';
 
-import { selectors as channelSelectors } from '../store/channelsSlice.js';
-import { selectors as messageSelectors } from '../store/messagesSlice.js';
 import fetchData from '../store/fetchData.js';
+import { addMessage, selectors as messageSelectors } from '../store/messagesSlice.js';
+import {
+  addChannel,
+  renameChannel,
+  removeChannel,
+  changeCurrentChannel,
+  selectors as channelSelectors,
+} from '../store/channelsSlice.js';
 
-const ChatPage = () => {
+const ChatPage = ({ socket }) => {
   const currentChannelId = useSelector((state) => state.channels.currentChannelId);
   const currentChannel = useSelector(
     (state) => channelSelectors.selectById(state, currentChannelId),
@@ -20,14 +26,39 @@ const ChatPage = () => {
   const dispatch = useDispatch();
 
   useEffect(() => {
+    socket.on('newMessage', (message) => {
+      dispatch(addMessage(message));
+    });
+
+    socket.on('newChannel', (channel) => {
+      dispatch(addChannel(channel));
+      dispatch(changeCurrentChannel({ id: channel.id }));
+    });
+
+    socket.on('renameChannel', (channel) => {
+      dispatch(renameChannel(channel));
+    });
+
+    socket.on('removeChannel', ({ id }) => {
+      dispatch(removeChannel(id));
+    });
+
     dispatch(fetchData());
-  }, [dispatch]);
+  }, [dispatch, socket]);
 
   return (
     <div className="container h-100 my-4 overflow-hidden rounded shadow">
       <div className="row h-100 bg-white flex-md-row">
-        <ChannelList currentChannelId={currentChannelId} channelsData={channels} />
-        <MessageList currentChannel={currentChannel} currentMessages={messages} />
+        <ChannelList
+          currentChannelId={currentChannelId}
+          channelsData={channels}
+          socket={socket}
+        />
+        <MessageList
+          currentChannel={currentChannel}
+          currentMessages={messages.filter((m) => m.channelId === currentChannelId)}
+          socket={socket}
+        />
       </div>
     </div>
   );
