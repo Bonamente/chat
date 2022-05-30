@@ -25,7 +25,7 @@ const ChannelList = ({ currentChannelId, channelsData }) => (
               <Button
                 className="w-100 rounded-0 text-start text-truncate"
                 variant={id === currentChannelId ? 'secondary' : 'light'}
-                //TODO
+                // TODO
                 onClick={() => {}}
               >
                 <span className="me-1">#</span>
