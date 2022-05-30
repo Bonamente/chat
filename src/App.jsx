@@ -14,13 +14,15 @@ const AuthProvider = ({ children }) => {
   const curToken = localStorage.getItem('token');
   const [loggedIn, setLoggedIn] = useState(Boolean(curToken));
 
-  const logIn = ({ token }) => {
+  const logIn = ({ token, username }) => {
     localStorage.setItem('token', token);
+    localStorage.setItem('userName', username);
     setLoggedIn(true);
   };
 
   const logOut = () => {
     localStorage.removeItem('token');
+    localStorage.removeItem('userName');
     setLoggedIn(false);
   };
 
@@ -41,7 +43,7 @@ const PrivateRoute = ({ children }) => {
   );
 };
 
-const App = () => (
+const App = ({ socket }) => (
   <AuthProvider>
     <Layout>
       <Routes>
@@ -49,7 +51,7 @@ const App = () => (
           path="/"
           element={(
             <PrivateRoute>
-              <ChatPage />
+              <ChatPage socket={socket} />
             </PrivateRoute>
           )}
         />
