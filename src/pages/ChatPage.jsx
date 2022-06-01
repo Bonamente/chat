@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 
 import ChannelList from '../components/channels/ChannelList.jsx';
 import MessageList from '../components/messages/MessageList.jsx';
+import Dialog from '../components/modals/index.jsx';
 
 import fetchData from '../store/fetchData.js';
 import { addMessage, selectors as messageSelectors } from '../store/messagesSlice.js';
@@ -25,6 +26,10 @@ const ChatPage = ({ socket }) => {
 
   const dispatch = useDispatch();
 
+  const selectChannelHandler = (id) => {
+    dispatch(changeCurrentChannel({ id }));
+  };
+
   useEffect(() => {
     socket.on('newMessage', (message) => {
       dispatch(addMessage(message));
@@ -40,7 +45,7 @@ const ChatPage = ({ socket }) => {
     });
 
     socket.on('removeChannel', ({ id }) => {
-      dispatch(removeChannel(id));
+      dispatch(removeChannel({ id }));
     });
 
     dispatch(fetchData());
@@ -52,6 +57,7 @@ const ChatPage = ({ socket }) => {
         <ChannelList
           currentChannelId={currentChannelId}
           channelsData={channels}
+          selectChannel={selectChannelHandler}
           socket={socket}
         />
         <MessageList
@@ -59,6 +65,7 @@ const ChatPage = ({ socket }) => {
           currentMessages={messages.filter((m) => m.channelId === currentChannelId)}
           socket={socket}
         />
+        <Dialog socket={socket} />
       </div>
     </div>
   );
