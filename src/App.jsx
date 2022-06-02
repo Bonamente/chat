@@ -7,6 +7,7 @@ import useAuth from './hooks/useAuth.jsx';
 
 import Layout from './components/layout/Layout.jsx';
 import LoginPage from './pages/LoginPage.jsx';
+import SignUpPage from './pages/SignUpPage.jsx';
 import ChatPage from './pages/ChatPage.jsx';
 import NotFoundPage from './pages/NotFoundPage.jsx';
 
@@ -56,6 +57,7 @@ const App = ({ socket }) => (
           )}
         />
         <Route path="/login" element={<LoginPage />} />
+        <Route path="/signup" element={<SignUpPage />} />
         <Route path="*" element={<NotFoundPage />} />
       </Routes>
     </Layout>
