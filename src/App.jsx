@@ -1,10 +1,7 @@
 import React, { useMemo, useState } from 'react';
-
 import { Routes, Route, Navigate } from 'react-router-dom';
-
 import AuthContext from './context/auth-context.jsx';
 import useAuth from './hooks/useAuth.jsx';
-
 import Layout from './components/layout/Layout.jsx';
 import LoginPage from './pages/LoginPage.jsx';
 import SignUpPage from './pages/SignUpPage.jsx';

@@ -1,14 +1,13 @@
 import React, { useEffect, useRef } from 'react';
-
+import { useTranslation } from 'react-i18next';
 import { Button, Form, Modal } from 'react-bootstrap';
-
 import { useFormik } from 'formik';
 import * as yup from 'yup';
-
 import { useSelector } from 'react-redux';
 import { selectors as channelSelectors } from '../../store/channelsSlice.js';
 
 const Rename = ({ onHide, socket }) => {
+  const { t } = useTranslation();
   const inputRef = useRef();
 
   useEffect(() => {
@@ -25,10 +24,10 @@ const Rename = ({ onHide, socket }) => {
     name: yup
       .string()
       .trim()
-      .required('Обязательное поле')
-      .min(3, 'От 3 до 20 символов')
-      .max(20, 'От 3 до 20 символов')
-      .notOneOf(channelNames, 'Должно быть уникальным'),
+      .required(t('errors.modal.required'))
+      .min(3, t('errors.modal.length'))
+      .max(20, t('errors.modal.length'))
+      .notOneOf(channelNames, t('errors.modal.unique')),
   });
 
   const onSubmit = (values, { setSubmitting }) => {
@@ -59,7 +58,7 @@ const Rename = ({ onHide, socket }) => {
   return (
     <>
       <Modal.Header closeButton onClick={onHide}>
-        <Modal.Title>Переименовать канал</Modal.Title>
+        <Modal.Title>{t('modal.rename.title')}</Modal.Title>
       </Modal.Header>
       <Modal.Body>
         <Form onSubmit={formik.handleSubmit}>
@@ -75,7 +74,7 @@ const Rename = ({ onHide, socket }) => {
               {...formik.getFieldProps('name')}
             />
             <Form.Label className="visually-hidden" htmlFor="name">
-              Имя канала
+              {t('modal.rename.name')}
             </Form.Label>
             <Form.Control.Feedback type="invalid">
               {formik.errors.name}
@@ -88,13 +87,13 @@ const Rename = ({ onHide, socket }) => {
               value="cancel"
               onClick={onHide}
             >
-              Отменить
+              {t('modal.rename.cancel_button')}
             </Button>
             <Button
               type="submit"
               variant="primary"
             >
-              Отправить
+              {t('modal.rename.submit_button')}
             </Button>
           </Modal.Footer>
         </Form>

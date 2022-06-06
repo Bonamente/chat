@@ -1,10 +1,11 @@
 import React, { useEffect, useRef } from 'react';
+import { useTranslation } from 'react-i18next';
 import { Form, InputGroup } from 'react-bootstrap';
 import { useFormik } from 'formik';
-
 import SendIcon from '../icons/SendIcon.jsx';
 
 const MessageForm = ({ currentChannelId, socket }) => {
+  const { t } = useTranslation();
   const inputRef = useRef();
 
   useEffect(() => {
@@ -45,8 +46,8 @@ const MessageForm = ({ currentChannelId, socket }) => {
             id="message"
             name="message"
             type="text"
-            placeholder="Введите сообщение..."
-            aria-label="Новое сообщение"
+            placeholder={t('messageForm.placeholder')}
+            aria-label={t('messageForm.new_message')}
             className="border-0 p-0 ps-2"
             ref={inputRef}
             readOnly={formik.isSubmitting}
@@ -58,7 +59,7 @@ const MessageForm = ({ currentChannelId, socket }) => {
             disabled={formik.values.message === '' || formik.isSubmitting}
           >
             <SendIcon />
-            <span className="visually-hidden">Отправить</span>
+            <span className="visually-hidden">{t('messageForm.send_button')}</span>
           </button>
         </InputGroup>
       </Form>

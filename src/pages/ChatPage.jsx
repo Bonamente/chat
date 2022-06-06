@@ -1,10 +1,8 @@
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-
 import ChannelList from '../components/channels/ChannelList.jsx';
 import MessageList from '../components/messages/MessageList.jsx';
 import Dialog from '../components/modals/index.jsx';
-
 import fetchData from '../store/fetchData.js';
 import { addMessage, selectors as messageSelectors } from '../store/messagesSlice.js';
 import {

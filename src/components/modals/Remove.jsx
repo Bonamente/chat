@@ -1,10 +1,10 @@
 import React from 'react';
-
+import { useTranslation } from 'react-i18next';
 import { Button, Modal } from 'react-bootstrap';
-
 import { useSelector } from 'react-redux';
 
 const Remove = ({ onHide, socket }) => {
+  const { t } = useTranslation();
   const currentChannelId = useSelector((state) => state.modal.data);
 
   const removeChannelHandler = () => {
@@ -25,10 +25,10 @@ const Remove = ({ onHide, socket }) => {
   return (
     <>
       <Modal.Header closeButton onClick={onHide}>
-        <Modal.Title>Удалить канал</Modal.Title>
+        <Modal.Title>{t('modal.remove.title')}</Modal.Title>
       </Modal.Header>
       <Modal.Body>
-        <p className="lead">Уверены?</p>
+        <p className="lead">{t('modal.remove.lead')}</p>
       </Modal.Body>
       <Modal.Footer>
         <Button
@@ -36,14 +36,14 @@ const Remove = ({ onHide, socket }) => {
           variant="secondary"
           onClick={onHide}
         >
-          Отменить
+          {t('modal.remove.cancel_button')}
         </Button>
         <Button
           type="button"
           variant="danger"
           onClick={removeChannelHandler}
         >
-          Удалить
+          {t('modal.remove.submit_button')}
         </Button>
       </Modal.Footer>
     </>

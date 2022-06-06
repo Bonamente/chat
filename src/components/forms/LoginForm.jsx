@@ -1,18 +1,17 @@
 import React, { useEffect, useRef, useState } from 'react';
-
+import { useTranslation } from 'react-i18next';
 import { Card, Form, Button } from 'react-bootstrap';
 import { Link, useNavigate } from 'react-router-dom';
-
 import { useFormik } from 'formik';
 import * as yup from 'yup';
 import axios from 'axios';
-
 import useAuth from '../../hooks/useAuth.jsx';
 import routes from '../../routes.js';
 
 const LoginForm = () => {
   const auth = useAuth();
   const [authFailed, setAuthFailed] = useState(false);
+  const { t } = useTranslation();
 
   const navigate = useNavigate();
   const inputRef = useRef();
@@ -58,20 +57,20 @@ const LoginForm = () => {
     <Card className="shadow-sm">
       <Card.Body className="row p-5 justify-content-center">
         <Form onSubmit={formik.handleSubmit}>
-          <h1 className="text-center mb-4">Войти</h1>
+          <h1 className="text-center mb-4">{t('logInForm.title')}</h1>
           <Form.Group className="form-floating mb-3">
             <Form.Control
               id="username"
               name="username"
               type="text"
               autoComplete="username"
-              placeholder="Ваш ник"
+              placeholder={t('logInForm.username')}
               required
               ref={inputRef}
               isInvalid={authFailed}
               {...formik.getFieldProps('username')}
             />
-            <Form.Label>Ваш ник</Form.Label>
+            <Form.Label>{t('logInForm.username')}</Form.Label>
           </Form.Group>
           <Form.Group className="form-floating mb-4">
             <Form.Control
@@ -79,14 +78,14 @@ const LoginForm = () => {
               name="password"
               type="password"
               autoComplete="current-password"
-              placeholder="Пароль"
+              placeholder={t('logInForm.password')}
               required
               isInvalid={authFailed}
               {...formik.getFieldProps('password')}
             />
-            <Form.Label>Пароль</Form.Label>
+            <Form.Label>{t('logInForm.password')}</Form.Label>
             <Form.Control.Feedback type="invalid">
-              Неверные имя пользователя или пароль
+              {t('errors.login.invalid_credentials')}
             </Form.Control.Feedback>
           </Form.Group>
           <Button
@@ -94,14 +93,17 @@ const LoginForm = () => {
             variant="outline-primary"
             className="w-100 mb-3"
           >
-            Войти
+            {t('logInForm.login_button')}
           </Button>
         </Form>
       </Card.Body>
       <Card.Footer className="p-4">
         <Card.Text className="text-center">
-          <span>Нет аккаунта? </span>
-          <Link to="/signup">Регистрация</Link>
+          <span>
+            {t('logInForm.no_account')}
+            &nbsp;
+          </span>
+          <Link to="/signup">{t('logInForm.link')}</Link>
         </Card.Text>
       </Card.Footer>
     </Card>
