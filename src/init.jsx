@@ -6,16 +6,20 @@ import { BrowserRouter } from 'react-router-dom';
 import { io } from 'socket.io-client';
 import i18n from 'i18next';
 import { initReactI18next } from 'react-i18next';
+import filter from 'leo-profanity';
 
 import store from './store/index.js';
 import resources from './locales/index.js';
 
 import App from './App.jsx';
 
-const startApp = async () => {
-  const currentLanguage = localStorage.getItem('currentLang') || 'ru';
-
+const runApp = async () => {
   const socket = io();
+
+  filter.add(filter.getDictionary('en'));
+  filter.add(filter.getDictionary('ru'));
+
+  const currentLanguage = localStorage.getItem('currentLang') || 'ru';
 
   const i18nextInstance = i18n.createInstance();
   await i18nextInstance
@@ -37,4 +41,4 @@ const startApp = async () => {
   );
 };
 
-export default startApp;
+export default runApp;
