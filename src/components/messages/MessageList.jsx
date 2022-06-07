@@ -1,5 +1,6 @@
 import React from 'react';
 import { useTranslation } from 'react-i18next';
+import filter from 'leo-profanity';
 import MessageForm from './MessageForm.jsx';
 
 const MessageList = ({ currentChannel, currentMessages, socket }) => {
@@ -10,7 +11,7 @@ const MessageList = ({ currentChannel, currentMessages, socket }) => {
       <div className="d-flex flex-column h-100">
         <div className="bg-light mb-4 p-3 shadow-sm small">
           <p className="m-0">
-            <b>{`# ${currentChannel?.name}`}</b>
+            <b>{`# ${filter.clean(currentChannel?.name)}`}</b>
           </p>
           <span className="text-muted">
             {t('messages.message', { count: currentMessages.length })}
@@ -23,7 +24,7 @@ const MessageList = ({ currentChannel, currentMessages, socket }) => {
           {currentMessages.map(({ author, text, id }) => (
             <div className="text-break mb-2" key={id}>
               <b>{author}</b>
-              {`: ${text}`}
+              {`: ${filter.clean(text)}`}
             </div>
           ))}
         </div>

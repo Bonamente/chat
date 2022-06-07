@@ -2,6 +2,7 @@ import React from 'react';
 import { useDispatch } from 'react-redux';
 import { useTranslation } from 'react-i18next';
 import { Button, Dropdown, Nav } from 'react-bootstrap';
+import filter from 'leo-profanity';
 import AddIcon from '../icons/AddIcon.jsx';
 import { showModal } from '../../store/modalSlice.js';
 
@@ -45,7 +46,7 @@ const ChannelList = ({ currentChannelId, channelsData, selectChannel }) => {
                   onClick={() => selectChannel(id)}
                 >
                   <span className="me-1">#</span>
-                  {name}
+                  {filter.clean(name)}
                 </Button>
                 <Dropdown.Toggle
                   id="dropdown-autoclose-true"
