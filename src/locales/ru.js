@@ -79,5 +79,11 @@ export default {
         unique: 'Должно быть уникальным',
       },
     },
+    toasts: {
+      add_channel: 'Канал создан',
+      rename_channel: 'Канал переименован',
+      remove_channel: 'Канал удалён',
+      net_error: 'Ошибка соединения',
+    },
   },
 };

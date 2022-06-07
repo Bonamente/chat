@@ -78,5 +78,11 @@ export default {
         unique: 'Must be unique',
       },
     },
+    toasts: {
+      add_channel: 'Channel has been created',
+      rename_channel: 'Channel has been renamed',
+      remove_channel: 'Channel has been deleted',
+      net_error: 'Connection error',
+    },
   },
 };
