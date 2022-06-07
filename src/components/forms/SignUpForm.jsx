@@ -1,5 +1,6 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { useTranslation } from 'react-i18next';
+import { toast } from 'react-toastify';
 import { Card, Form, Button } from 'react-bootstrap';
 import { useNavigate } from 'react-router-dom';
 import { useFormik } from 'formik';
@@ -61,7 +62,7 @@ const SignUpForm = () => {
       }
 
       setSubmitting(false);
-      throw err;
+      toast.error(t('toasts.net_error'));
     }
   };
 

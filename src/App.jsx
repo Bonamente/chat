@@ -1,5 +1,8 @@
 import React, { useMemo, useState } from 'react';
 import { Routes, Route, Navigate } from 'react-router-dom';
+import 'react-toastify/dist/ReactToastify.min.css';
+import { ToastContainer } from 'react-toastify';
+
 import AuthContext from './context/auth-context.jsx';
 import useAuth from './hooks/useAuth.jsx';
 import Layout from './components/layout/Layout.jsx';
@@ -58,6 +61,7 @@ const App = ({ socket }) => (
         <Route path="*" element={<NotFoundPage />} />
       </Routes>
     </Layout>
+    <ToastContainer />
   </AuthProvider>
 );
 

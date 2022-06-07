@@ -1,5 +1,6 @@
 import React from 'react';
 import { useTranslation } from 'react-i18next';
+import { toast } from 'react-toastify';
 import { Button, Modal } from 'react-bootstrap';
 import { useSelector } from 'react-redux';
 
@@ -14,10 +15,11 @@ const Remove = ({ onHide, socket }) => {
       const { status } = response;
 
       if (status === 'ok') {
+        toast.success(t('toasts.remove_channel'));
         onHide();
       } else {
-        // TODO
-        console.log('net error!');
+        toast.error(t('toasts.net_error'));
+        onHide();
       }
     });
   };

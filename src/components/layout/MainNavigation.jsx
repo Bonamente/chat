@@ -29,7 +29,7 @@ const MainNavigation = () => {
         <div className="d-flex space-between">
           { loggedIn && <Button type="button" onClick={logOut}>{t('nav.logout_button')}</Button> }
           <Dropdown style={{ marginLeft: 10 }}>
-            <Dropdown.Toggle variant="success" id="dropdown-basic">
+            <Dropdown.Toggle variant="dark" id="dropdown-basic">
               {currentLanguage}
             </Dropdown.Toggle>
 

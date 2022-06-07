@@ -1,5 +1,6 @@
 import React, { useEffect, useRef } from 'react';
 import { useTranslation } from 'react-i18next';
+import { toast } from 'react-toastify';
 import { Button, Form, Modal } from 'react-bootstrap';
 import { useFormik } from 'formik';
 import * as yup from 'yup';
@@ -40,10 +41,11 @@ const Rename = ({ onHide, socket }) => {
 
       if (status === 'ok') {
         setSubmitting(false);
+        toast.success(t('toasts.rename_channel'));
         onHide();
       } else {
-        // TODO
-        console.log('net error!');
+        toast.error(t('toasts.net_error'));
+        onHide();
       }
     });
   };
