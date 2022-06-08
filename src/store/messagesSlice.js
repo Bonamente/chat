@@ -1,3 +1,4 @@
+/* eslint-disable no-param-reassign */
 import { createEntityAdapter, createSlice } from '@reduxjs/toolkit';
 import fetchData from './fetchData.js';
 import { removeChannel } from './channelsSlice.js';
