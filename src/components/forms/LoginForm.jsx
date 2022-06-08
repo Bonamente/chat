@@ -89,9 +89,11 @@ const LoginForm = () => {
             <Form.Label htmlFor="password">
               {t('logInForm.password')}
             </Form.Label>
-            <Form.Control.Feedback type="invalid" tooltip>
-              {t('errors.login.invalid_credentials')}
-            </Form.Control.Feedback>
+            {authFailed && (
+              <Form.Control.Feedback type="invalid" tooltip>
+                {t('errors.login.invalid_credentials')}
+              </Form.Control.Feedback>
+            )}
           </Form.Group>
           <Button
             type="submit"
