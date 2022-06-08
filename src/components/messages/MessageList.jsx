@@ -1,10 +1,15 @@
-import React from 'react';
+import React, { useEffect, useRef } from 'react';
 import { useTranslation } from 'react-i18next';
 import filter from 'leo-profanity';
 import MessageForm from './MessageForm.jsx';
 
 const MessageList = ({ currentChannel, currentMessages, socket }) => {
   const { t } = useTranslation();
+  const messagesBoxRef = useRef();
+
+  useEffect(() => {
+    messagesBoxRef.current.scrollTop = messagesBoxRef.current.scrollHeight;
+  }, [currentMessages]);
 
   return (
     <div className="col p-0 h-100">
@@ -20,6 +25,7 @@ const MessageList = ({ currentChannel, currentMessages, socket }) => {
         <div
           id="messages-box"
           className="chat-messages overflow-auto px-5"
+          ref={messagesBoxRef}
         >
           {currentMessages.map(({ author, text, id }) => (
             <div className="text-break mb-2" key={id}>
