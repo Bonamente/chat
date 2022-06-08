@@ -1,7 +1,7 @@
 {
   "name": "@hexlet/code",
   "version": "0.0.1",
-  "description": "",
+  "description": "simplified clone of Slack",
   "main": "src/index.js",
   "type": "module",
   "scripts": {
