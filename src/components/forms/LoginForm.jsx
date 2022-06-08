@@ -71,7 +71,9 @@ const LoginForm = () => {
               isInvalid={authFailed}
               {...formik.getFieldProps('username')}
             />
-            <Form.Label>{t('logInForm.username')}</Form.Label>
+            <Form.Label htmlFor="username">
+              {t('logInForm.username')}
+            </Form.Label>
           </Form.Group>
           <Form.Group className="form-floating mb-4">
             <Form.Control
@@ -84,8 +86,10 @@ const LoginForm = () => {
               isInvalid={authFailed}
               {...formik.getFieldProps('password')}
             />
-            <Form.Label>{t('logInForm.password')}</Form.Label>
-            <Form.Control.Feedback type="invalid">
+            <Form.Label htmlFor="password">
+              {t('logInForm.password')}
+            </Form.Label>
+            <Form.Control.Feedback type="invalid" tooltip>
               {t('errors.login.invalid_credentials')}
             </Form.Control.Feedback>
           </Form.Group>
