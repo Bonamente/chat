@@ -41,13 +41,13 @@ export default {
         title: 'Add a channel',
         name: 'Channel name',
         cancel_button: 'Cancel',
-        submit_button: 'Add',
+        submit_button: 'Submit',
       },
       rename: {
         title: 'Rename the channel',
         name: 'Channel name',
         cancel_button: 'Cancel',
-        submit_button: 'Rename',
+        submit_button: 'Submit',
       },
       remove: {
         title: 'Delete the channel',
