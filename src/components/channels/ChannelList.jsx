@@ -37,7 +37,7 @@ const ChannelList = ({ currentChannelId, channelsData, selectChannel }) => {
       </div>
       <Nav as="ul" className="flex-column nav-pills nav-fill px-2">
         {channelsData.map(({ id, name, removable }) => (
-          <Nav.Item as="li" className="w-100" key={id}>
+          <Nav.Item as="li" className="w-100 mb-1" key={id}>
             {removable ? (
               <Dropdown className="d-flex btn-group">
                 <Button
