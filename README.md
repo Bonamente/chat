@@ -1,6 +1,6 @@
 [![Actions Status](https://github.com/Bonamente/frontend-project-lvl4/workflows/hexlet-check/badge.svg)](https://github.com/Bonamente/frontend-project-lvl4/actions)
 
-# Hexlet chat
+# Chat
  A simplified analogue of the Slack.
  
 ## Technologies
@@ -21,4 +21,4 @@
 - **Rollbar**
 
 ### Deploy
-https://rocky-river-25033.herokuapp.com/
+https://chat-production-9ffe.up.railway.app/
