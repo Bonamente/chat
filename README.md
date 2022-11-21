@@ -17,7 +17,7 @@
 - **axios**
 - **normalizr**
 - **webpack**
-- **Heroku**
+- **Railway**
 - **Rollbar**
 
 ### Deploy
